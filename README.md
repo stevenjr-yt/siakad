@@ -7,12 +7,27 @@
 
 ## 📖 Overview
 
-This is an automated repository backup for **siakad**. 
+**Aplikasi Web Native berbasis PHP & MySQL.**
 
-## ⚖️ Copyright & License
+Ini adalah repositori otomatis yang berisi arsip / *source code* dari sistem **siakad**.
 
-**Copyright © 2026 SteVenJr Studio.** 
-**All Rights Reserved.**
+## ✨ Fitur Utama
 
-This software and its documentation are the property of SteVenJr Studio. Unauthorized copying, modification, distribution, or use of this software, via any medium, is strictly prohibited without written permission from the copyright owner.
+- Manajemen data dinamis\n- Sistem Login Admin\n- Cetak Laporan (menggunakan library FPDF/Mpdf)\n- Dashboard pengelolaan lengkap
 
+## ⚙️ Cara Menjalankan (Deployment)
+
+Untuk menjalankan dan mengkonfigurasi aplikasi ini, ikuti langkah-langkah berikut:
+
+1. Pindahkan folder ini ke direktori web server (misal: `htdocs` untuk XAMPP atau `/var/www/html` untuk Apache Linux).\n2. Buat database baru di MySQL/MariaDB.\n3. Import file database yang tersedia atau sesuaikan konfigurasi koneksi di file `koneksi.php` / konfigurasi database.\n4. Akses melalui browser di `http://localhost/nama-folder`.
+
+---
+
+## ⚖️ Hak Cipta & Lisensi (Copyright & License)
+
+**Copyright © 2026 SteVenJr Studio. All Rights Reserved.**
+
+Perangkat lunak ini dan seluruh dokumentasinya adalah hak milik eksklusif **SteVenJr Studio**.
+Anda **DILARANG KERAS** untuk:
+1. Menyalin, memodifikasi, mendistribusikan ulang, mensublisensikan, atau menjual salinan *software* ini.
+2. Menggunakan perangkat lunak ini untuk keperluan komersial tanpa izin tertulis dari pemilik hak cipta.
