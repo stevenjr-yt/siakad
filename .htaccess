@@ -1,0 +1,38 @@
+# Matikan fitur directory browsing & MultiViews
+Options -Indexes -MultiViews
+
+# Atur halaman error custom (Tanpa .php)
+ErrorDocument 403 /forbidden
+ErrorDocument 404 /404
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. ANTI SQL INJECTION (DENGAN PEMBUANG QUERY)
+    # Jangan cek kalau request sudah menuju halaman forbidden biar ga looping
+    RewriteCond %{REQUEST_URI} !^/forbidden [NC]
+    # Deteksi pola SQL Injection
+    RewriteCond %{QUERY_STRING} [^a-z](declare|char|set|cast|convert|delete|drop|exec|insert|meta|select|truncate|update) [NC,OR]
+    RewriteCond %{QUERY_STRING} (;|'|"|%22|%27|%3C|%3E|%00) [NC,OR]
+    RewriteCond %{QUERY_STRING} (--) [NC]
+    # Redirect ke /forbidden dan BUANG query stringnya (pake tanda ? di akhir)
+    RewriteRule ^.*$ /forbidden? [L,R=302]
+
+    # 2. HILANGKAN /index atau /index.php (Redirect ke Root / )
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /+(index)(\.php)?[\ ?] [NC]
+    RewriteRule ^index(\.php)?$ / [R=301,L]
+
+    # 3. Redirect Otomatis: /file.php ke /file (Hilangkan .php di browser)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*?)\.php[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,L,NE]
+
+    # 4. Internal Rewrite: Panggil file .php di belakang layar
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*?)/?$ $1.php [L]
+
+    # 5. Rule Berita (Slug) SIAKAD
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^/]+)/?$ detail_berita.php?slug=$1 [L,QSA]
+</IfModule>
